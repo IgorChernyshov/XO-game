@@ -53,6 +53,107 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9CD54A07223FA7BA0007479E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				9CD54A08223FA7C40007479E /* BusinessLogic */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		9CD54A08223FA7C40007479E /* BusinessLogic */ = {
+			isa = PBXGroup;
+			children = (
+				9CD54A09223FA7CA0007479E /* AppDelegate */,
+				F874E4E62225CB3F00364CAE /* Entities */,
+			);
+			path = BusinessLogic;
+			sourceTree = "<group>";
+		};
+		9CD54A09223FA7CA0007479E /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				F874E4702224621100364CAE /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		9CD54A0A223FA7E60007479E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				9CD54A0B223FA7EA0007479E /* Elements */,
+				9CD54A0C223FA7F20007479E /* Modules */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		9CD54A0B223FA7EA0007479E /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				9CD54A11223FA8E70007479E /* Basic */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
+		9CD54A0C223FA7F20007479E /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				F874E4742224621100364CAE /* Main.storyboard */,
+				F874E4722224621100364CAE /* GameViewController.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		9CD54A0D223FA84B0007479E /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				9CD54A0F223FA85C0007479E /* Release */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		9CD54A0E223FA8520007479E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9CD54A10223FA8690007479E /* Assets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9CD54A0F223FA85C0007479E /* Release */ = {
+			isa = PBXGroup;
+			children = (
+				F874E47C2224621300364CAE /* Info.plist */,
+			);
+			path = Release;
+			sourceTree = "<group>";
+		};
+		9CD54A10223FA8690007479E /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				F874E4772224621300364CAE /* Assets.xcassets */,
+				F874E4792224621300364CAE /* LaunchScreen.storyboard */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		9CD54A11223FA8E70007479E /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				9CD54A12223FA8EC0007479E /* UIView */,
+			);
+			path = Basic;
+			sourceTree = "<group>";
+		};
+		9CD54A12223FA8EC0007479E /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				F874E4DA2225C1AC00364CAE /* GameboardView.swift */,
+				F874E4E02225CAAF00364CAE /* MarkViews */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
 		F874E4642224621100364CAE = {
 			isa = PBXGroup;
 			children = (
@@ -72,15 +173,11 @@
 		F874E46F2224621100364CAE /* XO-game */ = {
 			isa = PBXGroup;
 			children = (
-				F874E4702224621100364CAE /* AppDelegate.swift */,
-				F874E4722224621100364CAE /* GameViewController.swift */,
+				9CD54A07223FA7BA0007479E /* Application */,
 				F874E4F02225DFF700364CAE /* Referee.swift */,
-				F874E4E62225CB3F00364CAE /* Models */,
-				F874E4E52225CB3100364CAE /* Views */,
-				F874E4772224621300364CAE /* Assets.xcassets */,
-				F874E4742224621100364CAE /* Main.storyboard */,
-				F874E4792224621300364CAE /* LaunchScreen.storyboard */,
-				F874E47C2224621300364CAE /* Info.plist */,
+				9CD54A0A223FA7E60007479E /* UI */,
+				9CD54A0E223FA8520007479E /* Resources */,
+				9CD54A0D223FA84B0007479E /* Configuration */,
 			);
 			path = "XO-game";
 			sourceTree = "<group>";
@@ -95,16 +192,7 @@
 			path = MarkViews;
 			sourceTree = "<group>";
 		};
-		F874E4E52225CB3100364CAE /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				F874E4E02225CAAF00364CAE /* MarkViews */,
-				F874E4DA2225C1AC00364CAE /* GameboardView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		F874E4E62225CB3F00364CAE /* Models */ = {
+		F874E4E62225CB3F00364CAE /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				F874E4DC2225C25D00364CAE /* GameboardPosition.swift */,
@@ -112,7 +200,7 @@
 				F874E4F42225E2CD00364CAE /* Gameboard.swift */,
 				F874E4EE2225DE4500364CAE /* Player.swift */,
 			);
-			path = Models;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,8 +431,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6G4AKDTMLW;
-				INFOPLIST_FILE = "XO-game/Info.plist";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "$(SRCROOT)/XO-game/Configuration/Release/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -361,8 +449,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6G4AKDTMLW;
-				INFOPLIST_FILE = "XO-game/Info.plist";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "$(SRCROOT)/XO-game/Configuration/Release/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
