@@ -55,6 +55,7 @@ class GameViewController: UIViewController {
   
   private func switchToPlayerInputState(with player: Player) {
     currentState = PlayerInputState(player: player,
+                                    markViewPrototype: player.markViewPrototype,
                                     gameViewController: self,
                                     gameboard: gameboard,
                                     gameboardView: gameboardView)
@@ -63,5 +64,6 @@ class GameViewController: UIViewController {
   @IBAction func restartButtonTapped(_ sender: UIButton) {
     
   }
+  
 }
 
