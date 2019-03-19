@@ -29,6 +29,7 @@ public class GameEndedState: GameState {
     }
     self.gameViewController?.firstPlayerTurnLabel.isHidden = true
     self.gameViewController?.secondPlayerTurnLabel.isHidden = true
+    Log(.gameFinished(winner: winner))
   }
   
   public func addMark(at position: GameboardPosition) { }

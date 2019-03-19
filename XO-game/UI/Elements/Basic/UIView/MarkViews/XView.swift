@@ -19,4 +19,5 @@ public class XView: MarkView {
         path.addLine(to: CGPoint(x: 0.25 * bounds.width, y: 0.75 * bounds.height))
         shapeLayer.path = path.cgPath
     }
+  
 }
