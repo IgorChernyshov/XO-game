@@ -38,6 +38,20 @@ public final class Gameboard {
     return positions[column][row] == player
   }
   
+  public func getFreePositions() -> [GameboardPosition] {
+    var freePositions: [GameboardPosition] = []
+    
+    for column in 0 ..< GameboardSize.columns {
+      for row in 0 ..< GameboardSize.rows {
+        if positions[column][row] == nil {
+          freePositions.append(GameboardPosition(column: column, row: row))
+        }
+      }
+    }
+    
+    return freePositions
+  }
+  
   public func allPositionsAreFilled() -> Bool {
     for rows in positions {
       for position in rows {

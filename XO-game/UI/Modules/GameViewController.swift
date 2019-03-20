@@ -17,6 +17,7 @@ class GameViewController: UIViewController {
   @IBOutlet var restartButton: UIButton!
   
   private let gameboard = Gameboard()
+  private let xoBot = xoEasyBot()
   private lazy var referee = Referee(gameboard: self.gameboard)
   private var currentState: GameState! {
     didSet {
@@ -24,15 +25,24 @@ class GameViewController: UIViewController {
     }
   }
   
+  var gameMode: GameMode?
+  
   override public func viewDidLoad() {
     super.viewDidLoad()
     self.goToFirstState()
     
     gameboardView.onSelectPosition = { [weak self] position in
       guard let self = self else { return }
+      
+      // Player's turn
       self.currentState.addMark(at: position)
       if self.currentState.isCompleted {
         self.goToNextState()
+      }
+      
+      // Bot's turn if there is any
+      if (self.gameMode == .vsBot) && (self.currentState is PlayerInputState) {
+        self.makeBotTurn()
       }
     }
   }
@@ -61,9 +71,16 @@ class GameViewController: UIViewController {
                                     gameboardView: gameboardView)
   }
   
+  private func makeBotTurn() {
+    let selectedPosition = self.xoBot.selectPosition(at: self.gameboard)
+    self.currentState.addMark(at: selectedPosition)
+    if self.currentState.isCompleted {
+      self.goToNextState()
+    }
+  }
+  
   @IBAction func restartButtonTapped(_ sender: UIButton) {
     Log(.restartGame)
   }
   
 }
-
