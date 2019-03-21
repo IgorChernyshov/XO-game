@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Qe6-jb-Z05">
-                                <rect key="frame" x="127" y="291.5" width="121" height="84"/>
+                                <rect key="frame" x="115.5" y="265.5" width="144" height="136"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VB1-TF-CVv">
-                                        <rect key="frame" x="0.0" y="0.0" width="121" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="144" height="32"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Practice vs Bot"/>
                                         <connections>
@@ -30,11 +30,19 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWG-JY-QYl">
-                                        <rect key="frame" x="0.0" y="52" width="121" height="32"/>
+                                        <rect key="frame" x="0.0" y="52" width="144" height="32"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Player vs Player"/>
                                         <connections>
                                             <action selector="gameModeButtonWasPressed:" destination="K0D-wp-wMY" eventType="touchUpInside" id="GAv-eI-q8h"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jQC-Ta-ebl">
+                                        <rect key="frame" x="0.0" y="104" width="144" height="32"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <state key="normal" title="Five Turns At Once"/>
+                                        <connections>
+                                            <action selector="gameModeButtonWasPressed:" destination="K0D-wp-wMY" eventType="touchUpInside" id="gjf-2y-aPt"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -11,4 +11,5 @@ import Foundation
 enum GameMode {
   case vsPlayer
   case vsBot
+  case fiveTurns
 }

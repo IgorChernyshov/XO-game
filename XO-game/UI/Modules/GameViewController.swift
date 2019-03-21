@@ -17,8 +17,9 @@ class GameViewController: UIViewController {
   @IBOutlet var restartButton: UIButton!
   
   private let gameboard = Gameboard()
+  private var turnInvoker: TurnInvoker?
   private let xoBot = xoEasyBot()
-  private lazy var referee = Referee(gameboard: self.gameboard)
+  private lazy var referee = Referee(gameboard: gameboard)
   private var currentState: GameState! {
     didSet {
       self.currentState.begin()
@@ -42,18 +43,19 @@ class GameViewController: UIViewController {
   }
   
   private func goToFirstState() {
-    switchToPlayerInputState(with: .first)
+    switch gameMode ?? .vsBot {
+    case .vsBot, .vsPlayer:
+      switchToPlayerInputState(with: .first)
+    case .fiveTurns:
+      self.turnInvoker = TurnInvoker(gameMode: .fiveTurns, gameboard: gameboard, gameboardView: gameboardView)
+      switchToPlayerInputFiveTurnsState(with: .first)
+    }
   }
   
   private func goToNextState() {
-    if let winner = self.referee.determineWinner() {
-      currentState = GameEndedState(winner: winner, gameViewController: self)
-      return
-    } else if self.gameboard.allPositionsAreFilled() {
-      currentState = GameEndedState(winner: nil, gameViewController: self)
-    }
     switch gameMode ?? .vsBot {
     case .vsBot:
+      determineWinner()
       if let playerInputState = currentState as? PlayerInputState {
         switchToBotInputState(with: playerInputState.player.next)
       }
@@ -61,9 +63,34 @@ class GameViewController: UIViewController {
         switchToPlayerInputState(with: playerInputState.player.next)
       }
     case .vsPlayer:
+      determineWinner()
       if let playerInputState = currentState as? PlayerInputState {
         switchToPlayerInputState(with: playerInputState.player.next)
       }
+    case .fiveTurns:
+      if let playerInputState = currentState as? PlayerInputFiveTurnsState {
+        if playerInputState.player == .first {
+          switchToPlayerInputFiveTurnsState(with: playerInputState.player.next)
+        } else {
+          switchToPlayerInputFiveTurnsExecuteState()
+          determineWinner()
+        }
+      }
+    }
+  }
+  
+  private func determineWinner() {
+    if let winner = self.referee.determineWinner() {
+      currentState = GameEndedState(winner: winner, gameViewController: self)
+      return
+    }
+    switch gameMode ?? .vsBot {
+    case .vsBot, .vsPlayer:
+      if self.gameboard.allPositionsAreFilled() {
+        currentState = GameEndedState(winner: nil, gameViewController: self)
+      }
+    case .fiveTurns:
+      currentState = GameEndedState(winner: nil, gameViewController: self)
     }
   }
   
@@ -83,8 +110,27 @@ class GameViewController: UIViewController {
                                  gameboardView: gameboardView)
   }
   
+  private func switchToPlayerInputFiveTurnsState(with player: Player) {
+    guard let turnInvoker = turnInvoker else { return }
+    currentState = PlayerInputFiveTurnsState(player: player,
+                                    markViewPrototype: player.markViewPrototype,
+                                    gameViewController: self,
+                                    gameboard: gameboard,
+                                    gameboardView: gameboardView,
+                                    turnInvoker: turnInvoker)
+  }
+  
+  private func switchToPlayerInputFiveTurnsExecuteState() {
+    guard let turnInvoker = turnInvoker else { return }
+    currentState = ExecuteFiveTurnsState(turnsInvoker: turnInvoker)
+  }
+  
   @IBAction func restartButtonTapped(_ sender: UIButton) {
     Log(.restartGame)
+    
+    gameboard.clear()
+    gameboardView.clear()
+    goToFirstState()
   }
   
 }

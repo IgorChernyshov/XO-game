@@ -25,6 +25,8 @@ class MainMenuViewController: UIViewController {
       gameVC.gameMode = .vsBot
     case 2: // Player vs Player
       gameVC.gameMode = .vsPlayer
+    case 3: // Five Turns At Once
+      gameVC.gameMode = .fiveTurns
     default:
       print("Unknown button was tapped")
       return
