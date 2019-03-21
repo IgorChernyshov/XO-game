@@ -34,15 +34,9 @@ class GameViewController: UIViewController {
     gameboardView.onSelectPosition = { [weak self] position in
       guard let self = self else { return }
       
-      // Player's turn
       self.currentState.addMark(at: position)
       if self.currentState.isCompleted {
         self.goToNextState()
-      }
-      
-      // Bot's turn if there is any
-      if (self.gameMode == .vsBot) && (self.currentState is PlayerInputState) {
-        self.makeBotTurn()
       }
     }
   }
@@ -58,8 +52,18 @@ class GameViewController: UIViewController {
     } else if self.gameboard.allPositionsAreFilled() {
       currentState = GameEndedState(winner: nil, gameViewController: self)
     }
-    if let playerInputState = currentState as? PlayerInputState {
-      switchToPlayerInputState(with: playerInputState.player.next)
+    switch gameMode ?? .vsBot {
+    case .vsBot:
+      if let playerInputState = currentState as? PlayerInputState {
+        switchToBotInputState(with: playerInputState.player.next)
+      }
+      if let playerInputState = currentState as? BotInputState {
+        switchToPlayerInputState(with: playerInputState.player.next)
+      }
+    case .vsPlayer:
+      if let playerInputState = currentState as? PlayerInputState {
+        switchToPlayerInputState(with: playerInputState.player.next)
+      }
     }
   }
   
@@ -71,12 +75,12 @@ class GameViewController: UIViewController {
                                     gameboardView: gameboardView)
   }
   
-  private func makeBotTurn() {
-    let selectedPosition = self.xoBot.selectPosition(at: self.gameboard)
-    self.currentState.addMark(at: selectedPosition)
-    if self.currentState.isCompleted {
-      self.goToNextState()
-    }
+  private func switchToBotInputState(with player: Player) {
+    currentState = BotInputState(player: player,
+                                 markViewPrototype: player.markViewPrototype,
+                                 gameViewController: self,
+                                 gameboard: gameboard,
+                                 gameboardView: gameboardView)
   }
   
   @IBAction func restartButtonTapped(_ sender: UIButton) {
